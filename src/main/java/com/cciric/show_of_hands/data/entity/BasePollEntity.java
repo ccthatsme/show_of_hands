@@ -1,13 +1,14 @@
-package com.cciric.show_of_hands.data;
+package com.cciric.show_of_hands.data.entity;
 
 import com.cciric.show_of_hands.models.User;
+
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "BasePoll")
 @MappedSuperclass
-public class BasePoll {
+public class BasePollEntity {
 
     public static final String SHOW_OF_HANDS = "Show of hands ";
 
@@ -15,6 +16,7 @@ public class BasePoll {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     public int id;
+
 
     @Column(name = "question", nullable = false)
     public String question;
@@ -26,7 +28,7 @@ public class BasePoll {
     public int resultOne;
 
     @JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     public User user;
 
     public static String getShowOfHands() {
@@ -46,7 +48,7 @@ public class BasePoll {
     }
 
     public void setQuestion(String question) {
-        this.question = question;
+        this.question = SHOW_OF_HANDS + question;
     }
 
     public String getChoiceOne() {
