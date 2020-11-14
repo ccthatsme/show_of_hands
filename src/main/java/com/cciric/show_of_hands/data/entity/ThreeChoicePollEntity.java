@@ -1,5 +1,7 @@
 package com.cciric.show_of_hands.data.entity;
 
+import com.cciric.show_of_hands.models.User;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -47,5 +49,55 @@ public class ThreeChoicePollEntity  extends BasePollEntity{
 
     public void setResultThree(int resultThree) {
         this.resultThree = resultThree;
+    }
+
+    @Override
+    public int getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
+
+    @Override
+    public String getQuestion() {
+        return super.getQuestion();
+    }
+
+    @Override
+    public void setQuestion(String question) {
+        super.setQuestion(question);
+    }
+
+    @Override
+    public String getChoiceOne() {
+        return super.getChoiceOne();
+    }
+
+    @Override
+    public void setChoiceOne(String choiceOne) {
+        super.setChoiceOne(choiceOne);
+    }
+
+    @Override
+    public int getResultOne() {
+        return super.getResultOne();
+    }
+
+    @Override
+    public void setResultOne(int resultOne) {
+        super.setResultOne(resultOne);
+    }
+
+    @Override
+    public User getUser() {
+        return super.getUser();
+    }
+
+    @Override
+    public void setUser(User user) {
+        super.setUser(user);
     }
 }
