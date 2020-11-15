@@ -6,12 +6,13 @@ import javax.persistence.*;
 
 @Table(name = "BasePoll")
 @Entity
-public abstract class BasePollEntity {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class BasePollEntity {
 
     public static final String SHOW_OF_HANDS = "Show of hands ";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id", unique = true, nullable = false)
     public int id;
 
