@@ -1,7 +1,5 @@
 package com.cciric.show_of_hands.data.entity;
 
-import com.cciric.show_of_hands.models.User;
-
 
 import javax.persistence.*;
 
@@ -29,7 +27,7 @@ public class BasePollEntity {
 
     @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
-    public User user;
+    public UserEntity user;
 
     public static String getShowOfHands() {
         return SHOW_OF_HANDS;
@@ -67,11 +65,11 @@ public class BasePollEntity {
         this.resultOne = resultOne;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 }

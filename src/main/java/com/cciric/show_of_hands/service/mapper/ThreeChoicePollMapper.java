@@ -2,11 +2,15 @@ package com.cciric.show_of_hands.service.mapper;
 
 import com.cciric.show_of_hands.data.entity.ThreeChoicePollEntity;
 import com.cciric.show_of_hands.models.ThreeChoicePoll;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 @Component
 public class ThreeChoicePollMapper implements EntityModelMapper<ThreeChoicePollEntity, ThreeChoicePoll> {
+
+    @Autowired
+    UserMapper um;
 
     @Override
     public ThreeChoicePoll entityToModel(ThreeChoicePollEntity entity) {
@@ -16,7 +20,7 @@ public class ThreeChoicePollMapper implements EntityModelMapper<ThreeChoicePollE
 
         tc.setId(entity.getId());
         tc.setQuestion(entity.getQuestion());
-        tc.setUser(entity.getUser());
+        tc.setUser(um.entityToModel(entity.getUser()));
         tc.setChoiceOne(entity.getChoiceOne());
         tc.setChoiceTwo(entity.getChoiceTwo());
         tc.setChoiceThree(entity.getChoiceThree());
@@ -37,7 +41,7 @@ public class ThreeChoicePollMapper implements EntityModelMapper<ThreeChoicePollE
 
         tc.setId(model.getId());
         tc.setQuestion(model.getQuestion());
-        tc.setUser(model.getUser());
+        tc.setUser(um.modelToEntity(model.getUser()));
         tc.setChoiceOne(model.getChoiceOne());
         tc.setChoiceTwo(model.getChoiceTwo());
         tc.setChoiceThree(model.getChoiceThree());

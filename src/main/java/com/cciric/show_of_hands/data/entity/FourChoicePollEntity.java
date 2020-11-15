@@ -1,7 +1,5 @@
 package com.cciric.show_of_hands.data.entity;
 
-import com.cciric.show_of_hands.models.User;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -113,12 +111,12 @@ public class FourChoicePollEntity extends BasePollEntity{
     }
 
     @Override
-    public User getUser() {
+    public UserEntity getUser() {
         return super.getUser();
     }
 
     @Override
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         super.setUser(user);
     }
 }
