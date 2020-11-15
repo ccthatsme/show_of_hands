@@ -1,5 +1,6 @@
 package com.cciric.show_of_hands.models;
 
+
 public class ThreeChoicePoll extends BasePoll{
 
     private String choiceTwo;

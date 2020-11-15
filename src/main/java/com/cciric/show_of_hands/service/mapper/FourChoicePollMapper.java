@@ -17,7 +17,7 @@ public class FourChoicePollMapper implements EntityModelMapper<FourChoicePollEnt
 
         fc.setId(entity.getId());
         fc.setQuestion(entity.getQuestion());
-        fc.setUser(entity.getUser());
+        //fc.setUser(entity.getUser());
         fc.setChoiceOne(entity.getChoiceOne());
         fc.setChoiceTwo(entity.getChoiceTwo());
         fc.setChoiceThree(entity.getChoiceThree());
@@ -38,7 +38,7 @@ public class FourChoicePollMapper implements EntityModelMapper<FourChoicePollEnt
 
         fc.setId(model.getId());
         fc.setQuestion(model.getQuestion());
-        fc.setUser(model.getUser());
+        //fc.setUser(model.getUser());
         fc.setChoiceOne(model.getChoiceOne());
         fc.setChoiceTwo(model.getChoiceTwo());
         fc.setChoiceThree(model.getChoiceThree());

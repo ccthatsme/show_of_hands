@@ -3,10 +3,10 @@ package com.cciric.show_of_hands.data.entity;
 
 import javax.persistence.*;
 
-@Entity
+
 @Table(name = "BasePoll")
-@MappedSuperclass
-public class BasePollEntity {
+@Entity
+public abstract class BasePollEntity {
 
     public static final String SHOW_OF_HANDS = "Show of hands ";
 
