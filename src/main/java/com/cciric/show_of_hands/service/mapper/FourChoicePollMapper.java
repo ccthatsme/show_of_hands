@@ -4,11 +4,15 @@ import com.cciric.show_of_hands.data.entity.FourChoicePollEntity;
 import com.cciric.show_of_hands.data.entity.ThreeChoicePollEntity;
 import com.cciric.show_of_hands.models.FourChoicePoll;
 import com.cciric.show_of_hands.models.ThreeChoicePoll;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 @Component
 public class FourChoicePollMapper implements EntityModelMapper<FourChoicePollEntity, FourChoicePoll>{
+    @Autowired
+    UserMapper um;
+
     @Override
     public FourChoicePoll entityToModel(FourChoicePollEntity entity) {
         Assert.notNull(entity, "entity is null");
@@ -17,7 +21,7 @@ public class FourChoicePollMapper implements EntityModelMapper<FourChoicePollEnt
 
         fc.setId(entity.getId());
         fc.setQuestion(entity.getQuestion());
-        //fc.setUser(entity.getUser());
+        fc.setUser(um.entityToModel(entity.getUser()));
         fc.setChoiceOne(entity.getChoiceOne());
         fc.setChoiceTwo(entity.getChoiceTwo());
         fc.setChoiceThree(entity.getChoiceThree());

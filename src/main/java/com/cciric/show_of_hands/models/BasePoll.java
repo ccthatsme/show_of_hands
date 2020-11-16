@@ -1,6 +1,6 @@
 package com.cciric.show_of_hands.models;
 
-public abstract class BasePoll {
+public class BasePoll {
 
     public static final String SHOW_OF_HANDS = "Show of hands ";
 
