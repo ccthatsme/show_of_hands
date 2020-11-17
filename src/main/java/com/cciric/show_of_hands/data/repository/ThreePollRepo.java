@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ThreePollRepo extends JpaRepository<ThreeChoicePollEntity, Integer> {
 
+//    void saveBasePollEntity(ThreeChoicePollEntity entity);
+
+
 }

@@ -1,10 +1,14 @@
 package com.cciric.show_of_hands.service.service;
 
 import com.cciric.show_of_hands.data.entity.BasePollEntity;
+import com.cciric.show_of_hands.data.entity.FourChoicePollEntity;
+import com.cciric.show_of_hands.data.entity.ThreeChoicePollEntity;
 import com.cciric.show_of_hands.data.repository.BasePollRepo;
 import com.cciric.show_of_hands.data.repository.FourPollRepo;
 import com.cciric.show_of_hands.data.repository.ThreePollRepo;
 import com.cciric.show_of_hands.models.BasePoll;
+import com.cciric.show_of_hands.models.FourChoicePoll;
+import com.cciric.show_of_hands.models.ThreeChoicePoll;
 import com.cciric.show_of_hands.service.mapper.BasePollMapper;
 import com.cciric.show_of_hands.service.mapper.FourChoicePollMapper;
 import com.cciric.show_of_hands.service.mapper.ThreeChoicePollMapper;
@@ -55,7 +59,7 @@ public class PollService {
         //List<BasePollEntity> listThreePoll = threePollRepo.findAll().stream().collect(Collectors.toList());
         //List<BasePollEntity> listFourPoll = fourPollRepo.findAll().stream().collect(Collectors.toList());
 
-       // List<BasePollEntity> newEntityList = Stream.of(listBasePoll, listThreePoll, listFourPoll).flatMap(Collection::stream).collect(Collectors.toList());
+        // List<BasePollEntity> newEntityList = Stream.of(listBasePoll, listThreePoll, listFourPoll).flatMap(Collection::stream).collect(Collectors.toList());
 
 //        newEntityList.stream().forEach(basePollEntity -> {
 //            modelList.add()
@@ -63,4 +67,34 @@ public class PollService {
 
         return modelList;
     }
+
+    public BasePoll createPoll(BasePollEntity entity) {
+
+        basePollRepo.save(entity);
+        return basePollMapper.entityToModel(entity);
+//        if(entity instanceof FourChoicePollEntity){
+//            fourPollRepo.save((FourChoicePollEntity) entity);
+//            return fourChoicePollMapper.entityToModel((FourChoicePollEntity) entity);
+//        }
+//
+//        else if(entity instanceof ThreeChoicePollEntity){
+//            threePollRepo.save((ThreeChoicePollEntity) entity);
+//            return threeChoicePollMapper.entityToModel((ThreeChoicePollEntity) entity);
+//        }
+
+
+    }
+
+    public ThreeChoicePoll createPoll(ThreeChoicePollEntity entity) {
+
+        threePollRepo.save(entity);
+        return threeChoicePollMapper.entityToModel(entity);
+    }
+
+    public FourChoicePoll createPoll(FourChoicePollEntity entity) {
+
+        fourPollRepo.save(entity);
+        return fourChoicePollMapper.entityToModel(entity);
+    }
+
 }
