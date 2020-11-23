@@ -56,14 +56,6 @@ public class PollService {
         fourPollRepo.findAll().stream().collect(Collectors.toList()).forEach(basePollEntity -> {
             modelList.add(fourChoicePollMapper.entityToModel(basePollEntity));
         });
-        //List<BasePollEntity> listThreePoll = threePollRepo.findAll().stream().collect(Collectors.toList());
-        //List<BasePollEntity> listFourPoll = fourPollRepo.findAll().stream().collect(Collectors.toList());
-
-        // List<BasePollEntity> newEntityList = Stream.of(listBasePoll, listThreePoll, listFourPoll).flatMap(Collection::stream).collect(Collectors.toList());
-
-//        newEntityList.stream().forEach(basePollEntity -> {
-//            modelList.add()
-//        });
 
         return modelList;
     }
@@ -72,15 +64,6 @@ public class PollService {
 
         basePollRepo.save(entity);
         return basePollMapper.entityToModel(entity);
-//        if(entity instanceof FourChoicePollEntity){
-//            fourPollRepo.save((FourChoicePollEntity) entity);
-//            return fourChoicePollMapper.entityToModel((FourChoicePollEntity) entity);
-//        }
-//
-//        else if(entity instanceof ThreeChoicePollEntity){
-//            threePollRepo.save((ThreeChoicePollEntity) entity);
-//            return threeChoicePollMapper.entityToModel((ThreeChoicePollEntity) entity);
-//        }
 
 
     }
