@@ -3,6 +3,7 @@ package com.cciric.show_of_hands.service.service;
 import com.cciric.show_of_hands.data.entity.BasePollEntity;
 import com.cciric.show_of_hands.data.entity.FourChoicePollEntity;
 import com.cciric.show_of_hands.data.entity.ThreeChoicePollEntity;
+import com.cciric.show_of_hands.data.entity.UserEntity;
 import com.cciric.show_of_hands.data.repository.BasePollRepo;
 import com.cciric.show_of_hands.data.repository.FourPollRepo;
 import com.cciric.show_of_hands.data.repository.ThreePollRepo;
@@ -80,4 +81,27 @@ public class PollService {
         return fourChoicePollMapper.entityToModel(entity);
     }
 
+    public BasePoll getPoll(int id) {
+        ThreeChoicePollEntity entity = threePollRepo.getOne(id);
+
+        return threeChoicePollMapper.entityToModel(entity);
+    }
+
+    public List<BasePoll> getAllPollsForUser(UserEntity entity) {
+
+        List<BasePollEntity> list = new ArrayList<>();
+        List<BasePoll> modelList = new ArrayList<>();
+
+//        basePollRepo.findAllByUser(entity.getId()).stream().collect(Collectors.toList()).forEach(basePollEntity -> {
+//            modelList.add(basePollMapper.entityToModel(basePollEntity));
+//        });
+        threePollRepo.findAllByUserId(entity.getId()).stream().collect(Collectors.toList()).forEach(basePollEntity -> {
+            modelList.add(threeChoicePollMapper.entityToModel(basePollEntity));
+        });
+//        fourPollRepo.findAllByUser(entity.getId()).stream().collect(Collectors.toList()).forEach(basePollEntity -> {
+//            modelList.add(fourChoicePollMapper.entityToModel(basePollEntity));
+//        });
+
+        return modelList;
+    }
 }

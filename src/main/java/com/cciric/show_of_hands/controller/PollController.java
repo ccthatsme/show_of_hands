@@ -20,9 +20,15 @@ public class PollController {
     @Autowired
     private PollService pollService;
 
+    @GetMapping(value = "/all_surveys")
+    public List<BasePoll> getAllPollsForUser(@RequestBody UserEntity entity){
+        return pollService.getAllPollsForUser(entity);
+    }
+
+//    @GetMapping(value = "/{id}")
     @GetMapping
-    public List<BasePoll> getAllPolls(){
-        return pollService.getAllPolls();
+    public BasePoll getPoll( @RequestParam("surveyId") int id){
+        return pollService.getPoll(id);
     }
 
     @PostMapping
