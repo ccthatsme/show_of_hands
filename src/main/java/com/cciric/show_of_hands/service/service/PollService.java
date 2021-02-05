@@ -87,7 +87,7 @@ public class PollService {
         return threeChoicePollMapper.entityToModel(entity);
     }
 
-    public List<BasePoll> getAllPollsForUser(UserEntity entity) {
+    public List<BasePoll> getAllPollsForUser(int id) {
 
         List<BasePollEntity> list = new ArrayList<>();
         List<BasePoll> modelList = new ArrayList<>();
@@ -95,7 +95,7 @@ public class PollService {
 //        basePollRepo.findAllByUser(entity.getId()).stream().collect(Collectors.toList()).forEach(basePollEntity -> {
 //            modelList.add(basePollMapper.entityToModel(basePollEntity));
 //        });
-        threePollRepo.findAllByUserId(entity.getId()).stream().collect(Collectors.toList()).forEach(basePollEntity -> {
+        threePollRepo.findAllByUserId(id).stream().collect(Collectors.toList()).forEach(basePollEntity -> {
             modelList.add(threeChoicePollMapper.entityToModel(basePollEntity));
         });
 //        fourPollRepo.findAllByUser(entity.getId()).stream().collect(Collectors.toList()).forEach(basePollEntity -> {
@@ -104,4 +104,17 @@ public class PollService {
 
         return modelList;
     }
+
+    public BasePoll recordChoiceThreePoll(ThreeChoicePollEntity entity) {
+        ThreeChoicePollEntity entityToUpdate = threePollRepo.getOne(entity.getId());
+        entityToUpdate.setResultOne(entity.getResultOne());
+        entityToUpdate.setResultTwo(entity.getResultTwo());
+        entityToUpdate.setResultThree(entity.getResultThree());
+
+        threePollRepo.saveAndFlush(entityToUpdate);
+
+        return threeChoicePollMapper.entityToModel(entityToUpdate);
+
+
+    };
 }

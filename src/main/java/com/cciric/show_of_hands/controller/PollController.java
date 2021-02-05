@@ -20,9 +20,14 @@ public class PollController {
     @Autowired
     private PollService pollService;
 
+//    @GetMapping(value = "/all_surveys")
+//    public List<BasePoll> getAllPollsForUser(@RequestBody UserEntity entity){
+//        return pollService.getAllPollsForUser(entity);
+//    }
+
     @GetMapping(value = "/all_surveys")
-    public List<BasePoll> getAllPollsForUser(@RequestBody UserEntity entity){
-        return pollService.getAllPollsForUser(entity);
+    public List<BasePoll> getAllPollsForUser(@RequestParam("userId") int userId){
+        return pollService.getAllPollsForUser(userId);
     }
 
 //    @GetMapping(value = "/{id}")
@@ -44,6 +49,11 @@ public class PollController {
     @PostMapping(value = "/fourpoll")
     public BasePoll createPollFourChoice(@RequestBody FourChoicePollEntity entity){
         return pollService.createPoll(entity);
+    }
+
+    @PutMapping(value = "/submit_three_poll")
+    public BasePoll recordChoiceThreePoll(@RequestBody ThreeChoicePollEntity entity){
+        return pollService.recordChoiceThreePoll(entity);
     }
 
 }
