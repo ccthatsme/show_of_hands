@@ -107,14 +107,13 @@ public class PollService {
 
     public BasePoll recordChoiceThreePoll(ThreeChoicePollEntity entity) {
         ThreeChoicePollEntity entityToUpdate = threePollRepo.getOne(entity.getId());
-        entityToUpdate.setResultOne(entity.getResultOne());
-        entityToUpdate.setResultTwo(entity.getResultTwo());
-        entityToUpdate.setResultThree(entity.getResultThree());
+        entityToUpdate.setResultOne(entity.getResultOne() + entityToUpdate.getResultOne());
+        entityToUpdate.setResultTwo(entity.getResultTwo() + entityToUpdate.getResultTwo());
+        entityToUpdate.setResultThree(entity.getResultThree() + entityToUpdate.getResultThree());
 
         threePollRepo.saveAndFlush(entityToUpdate);
 
         return threeChoicePollMapper.entityToModel(entityToUpdate);
-
 
     };
 }
