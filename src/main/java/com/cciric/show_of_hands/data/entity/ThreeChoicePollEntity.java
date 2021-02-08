@@ -98,4 +98,41 @@ public class ThreeChoicePollEntity  extends BasePollEntity{
     public void setUser(UserEntity user) {
         super.setUser(user);
     }
+
+    public String findDifferentResult(ThreeChoicePollEntity o, ThreeChoicePollEntity entityToUpdate){
+        String differentAttribute = "";
+        System.out.println(o.resultOne);
+        System.out.println(entityToUpdate.resultOne);
+        if(o.resultOne != entityToUpdate.resultOne){
+            differentAttribute = "resultOne";
+
+        }
+
+        else if(o.resultTwo != entityToUpdate.resultTwo){
+            differentAttribute = "resultTwo";
+
+        }
+
+        else if(o.resultThree != entityToUpdate.resultThree){
+            differentAttribute = "resultThree";
+
+        }
+
+        return differentAttribute;
+    }
+
+    @Override
+    public String toString() {
+        return "ThreeChoicePollEntity{" +
+                "choiceTwo='" + choiceTwo + '\'' +
+                ", choiceThree='" + choiceThree + '\'' +
+                ", resultTwo=" + resultTwo +
+                ", resultThree=" + resultThree +
+                ", id=" + id +
+                ", question='" + question + '\'' +
+                ", choiceOne='" + choiceOne + '\'' +
+                ", resultOne=" + resultOne +
+                ", user=" + user +
+                '}';
+    }
 }

@@ -13,12 +13,14 @@ import com.cciric.show_of_hands.models.ThreeChoicePoll;
 import com.cciric.show_of_hands.service.mapper.BasePollMapper;
 import com.cciric.show_of_hands.service.mapper.FourChoicePollMapper;
 import com.cciric.show_of_hands.service.mapper.ThreeChoicePollMapper;
+import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -42,6 +44,8 @@ public class PollService {
 
     @Autowired
     BasePollMapper basePollMapper;
+
+    private static final String[] resultArray = new String[]{"resultOne", "resultTwo", "resultThree", "resultFour"};
 
 
     public List<BasePoll> getAllPolls() {
@@ -106,14 +110,46 @@ public class PollService {
     }
 
     public BasePoll recordChoiceThreePoll(ThreeChoicePollEntity entity) {
-        ThreeChoicePollEntity entityToUpdate = threePollRepo.getOne(entity.getId());
-        entityToUpdate.setResultOne(entity.getResultOne() + entityToUpdate.getResultOne());
-        entityToUpdate.setResultTwo(entity.getResultTwo() + entityToUpdate.getResultTwo());
-        entityToUpdate.setResultThree(entity.getResultThree() + entityToUpdate.getResultThree());
+//        ThreeChoicePollEntity entityToUpdate = threePollRepo.getOne(entity.getId());
+//        entityToUpdate.setResultOne(entity.getResultOne() + entityToUpdate.getResultOne());
+//        entityToUpdate.setResultTwo(entity.getResultTwo() + entityToUpdate.getResultTwo());
+//        entityToUpdate.setResultThree(entity.getResultThree() + entityToUpdate.getResultThree());
+//
+//        threePollRepo.saveAndFlush(entityToUpdate);
 
-        threePollRepo.saveAndFlush(entityToUpdate);
-
-        return threeChoicePollMapper.entityToModel(entityToUpdate);
+        return checkIfEntityDifferent(entity);
 
     };
+
+    public BasePoll checkIfEntityDifferent(ThreeChoicePollEntity entity){
+
+        Optional<ThreeChoicePollEntity> entityToUpdate = Optional.of(threePollRepo.findById(entity.getId()).get());
+
+        String result = entityToUpdate.get().findDifferentResult(entity, entityToUpdate.get());
+
+        System.out.println(entity.toString());
+        System.out.println(entityToUpdate.toString());
+        System.out.println(result);
+
+
+
+        switch (result){
+            case "resultOne":
+                entityToUpdate.get().setResultOne(entity.getResultOne());
+                threePollRepo.saveAndFlush(entityToUpdate.get());
+                return threeChoicePollMapper.entityToModel(entityToUpdate.get());
+            case "resultTwo":
+                entityToUpdate.get().setResultTwo(entity.getResultTwo());
+                threePollRepo.saveAndFlush(entityToUpdate.get());
+                return threeChoicePollMapper.entityToModel(entityToUpdate.get());
+            case "resultThree":
+                entityToUpdate.get().setResultThree(entity.getResultThree());
+                threePollRepo.saveAndFlush(entityToUpdate.get());
+                return threeChoicePollMapper.entityToModel(entityToUpdate.get());
+
+            default:
+            return threeChoicePollMapper.entityToModel(entityToUpdate.get());
+
+        }
+    }
 }

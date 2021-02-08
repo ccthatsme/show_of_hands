@@ -2,6 +2,7 @@ package com.cciric.show_of_hands.data.entity;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Table(name = "BasePoll")
@@ -72,5 +73,22 @@ public class BasePollEntity {
 
     public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BasePollEntity)) return false;
+        BasePollEntity that = (BasePollEntity) o;
+        return id == that.id &&
+                resultOne == that.resultOne &&
+                question.equals(that.question) &&
+                choiceOne.equals(that.choiceOne) &&
+                user.equals(that.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, question, choiceOne, resultOne, user);
     }
 }
