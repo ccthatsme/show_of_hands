@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAfter(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
 
                 http.csrf().disable().authorizeRequests()
@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("http://localhost:8000/login.html");
 
-//        http.cors().disable();
+        http.cors().disable();
 //        http.csrf().disable();
 
     }
