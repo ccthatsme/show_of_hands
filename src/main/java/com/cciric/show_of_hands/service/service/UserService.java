@@ -41,4 +41,8 @@ public class UserService {
 
         return userMapper.entityToModel(entity);
     }
+
+    public void saveUser(UserEntity userEntity) {
+        userRepo.saveAndFlush(userEntity);
+    }
 }

@@ -4,6 +4,7 @@ import com.cciric.show_of_hands.data.entity.UserEntity;
 import com.cciric.show_of_hands.models.User;
 import com.cciric.show_of_hands.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserService userService;
@@ -28,5 +32,12 @@ public class UserController {
     @GetMapping(value = "/{id}")
     public User getUser(@PathVariable("id") int id){
         return userService.getUser(id);
+    }
+
+    @PostMapping("/sign-up")
+    public void signUp(@RequestBody UserEntity userEntity){
+        userEntity.setPassword(bCryptPasswordEncoder.encode(userEntity.getPassword()));
+        userService.saveUser(userEntity);
+
     }
 }
