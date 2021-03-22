@@ -32,8 +32,8 @@ public class AuthenticationController {
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
-       // String encodedPassword = new BCryptPasswordEncoder().encode(authenticationRequest.getPassword());
-        //authenticationRequest.setPassword(encodedPassword);
+//        String encodedPassword = new BCryptPasswordEncoder().encode(authenticationRequest.getPassword());
+//        authenticationRequest.setPassword(encodedPassword);
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
@@ -48,7 +48,7 @@ public class AuthenticationController {
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
-       // final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        //final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 

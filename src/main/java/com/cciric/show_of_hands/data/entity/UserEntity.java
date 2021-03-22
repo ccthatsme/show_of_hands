@@ -23,6 +23,8 @@ public class UserEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<BasePollEntity> pollList = new HashSet<>();
 
+
+
     public UserEntity(int id, String userName, String email, String password, Set<BasePollEntity> pollList) {
         this.id = id;
         this.userName = userName;
