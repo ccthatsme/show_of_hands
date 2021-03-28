@@ -1,6 +1,7 @@
 package com.cciric.show_of_hands.service.service;
 
 import com.cciric.show_of_hands.data.entity.UserEntity;
+import com.cciric.show_of_hands.data.repository.RoleRepository;
 import com.cciric.show_of_hands.data.repository.UserRepo;
 import com.cciric.show_of_hands.models.User;
 import com.cciric.show_of_hands.service.mapper.UserMapper;
