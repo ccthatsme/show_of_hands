@@ -1,5 +1,6 @@
 package com.cciric.show_of_hands.service.service;
 
+import com.cciric.show_of_hands.data.entity.Role.Role;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -31,12 +32,23 @@ public class JwtUtil {
         Map<String, Object> claims = new HashMap<>();
         Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
 
-        if(roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+        for (GrantedAuthority role: roles) {
+            role.getAuthority();
+        }
+
+        if(roles.contains(new SimpleGrantedAuthority("READ_PRIVILEGE")) && roles.contains(new SimpleGrantedAuthority("WRITE_PRIVILEGE"))){
             claims.put("isAdmin", true);
         }
-        if(roles.contains(new SimpleGrantedAuthority("ROLE_USER"))){
+        if(!roles.contains(new SimpleGrantedAuthority("WRITE_PRIVILEGE"))){
             claims.put("isUser", true);
         }
+
+//        if(roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+//            claims.put("isAdmin", true);
+//        }
+//        if(roles.contains(new SimpleGrantedAuthority("ROLE_USER"))){
+//            claims.put("isUser", true);
+//        }
 
         return doGenerateToken(claims, userDetails.getUsername());
     }
