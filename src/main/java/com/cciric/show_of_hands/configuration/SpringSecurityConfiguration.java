@@ -49,7 +49,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                .antMatchers("/users", "/users/**").authenticated()
                .antMatchers("/authenticate")
                .permitAll().anyRequest().authenticated()
-               //.and().httpBasic();
+               .and().formLogin().loginPage("http://localhost:8000/login.html").permitAll()
                //if any exception occus call this
                 .and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                //make sure we use stateless session, session wont be used to
@@ -59,5 +59,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
        //add a filter to validate the tokens with every request
         http.addFilterBefore(customJwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class);
+
+        http.cors().disable();
     }
 }
